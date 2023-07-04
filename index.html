@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
     <title>Light Meter</title>
     <style>
       [type='range'] {
@@ -15,85 +23,87 @@
   </head>
 
   <body>
-    <div class="control">
-      <label>Luminance</label>
-      <span id="luminance-display"></span>
-    </div>
-    <div class="control">
-      <label>ISO</label>
-      <input id="iso-unlocked" type="checkbox" checked />
-      <span id="iso-display"></span>
-      <input
-        id="iso-value"
-        list="iso-list"
-        value="400"
-        min="20"
-        max="3200"
-        step="20"
-        type="range"
-      />
-      <datalist id="iso-list">
-        <option value="20" />
-        <option value="32" />
-        <option value="64" />
-        <option value="100" />
-        <option value="200" />
-        <option value="400" />
-        <option value="800" />
-        <option value="1600" />
-        <option value="3200" />
-      </datalist>
-    </div>
-    <div class="control">
-      <label>Shutter Speed</label>
-      <input id="speed-unlocked" type="checkbox" />
-      <span id="speed-display"></span>
-      <input
-        id="speed-value"
-        list="speed-list"
-        value="250"
-        min="1"
-        max="1000"
-        type="range"
-      />
-      <datalist id="speed-list">
-        <option value="1" />
-        <option value="2" />
-        <option value="4" />
-        <option value="8" />
-        <option value="15" />
-        <option value="30" />
-        <option value="60" />
-        <option value="125" />
-        <option value="250" />
-        <option value="500" />
-        <option value="1000" />
-      </datalist>
-    </div>
-    <div class="control">
-      <label>Aperture</label>
-      <input id="aperture-unlocked" type="checkbox" checked />
-      <span id="aperture-display"></span>
-      <input
-        id="aperture-value"
-        list="aperture-list"
-        value="8"
-        min="1.4"
-        max="22"
-        step="any"
-        type="range"
-      />
-      <datalist id="aperture-list">
-        <option value="1.4" />
-        <option value="2" />
-        <option value="2.8" />
-        <option value="4" />
-        <option value="5.6" />
-        <option value="8" />
-        <option value="11" />
-        <option value="16" />
-        <option value="22" />
-      </datalist>
+    <div class="container">
+      <div class="control">
+        <label>Luminance</label>
+        <span id="luminance-display"></span>
+      </div>
+      <div class="control">
+        <label>ISO</label>
+        <input id="iso-unlocked" type="checkbox" checked />
+        <span id="iso-display"></span>
+        <input
+          id="iso-value"
+          list="iso-list"
+          value="400"
+          min="20"
+          max="3200"
+          step="20"
+          type="range"
+        />
+        <datalist id="iso-list">
+          <option value="20" />
+          <option value="32" />
+          <option value="64" />
+          <option value="100" />
+          <option value="200" />
+          <option value="400" />
+          <option value="800" />
+          <option value="1600" />
+          <option value="3200" />
+        </datalist>
+      </div>
+      <div class="control">
+        <label>Shutter Speed</label>
+        <input id="speed-unlocked" type="checkbox" />
+        <span id="speed-display"></span>
+        <input
+          id="speed-value"
+          list="speed-list"
+          value="250"
+          min="1"
+          max="1000"
+          type="range"
+        />
+        <datalist id="speed-list">
+          <option value="1" />
+          <option value="2" />
+          <option value="4" />
+          <option value="8" />
+          <option value="15" />
+          <option value="30" />
+          <option value="60" />
+          <option value="125" />
+          <option value="250" />
+          <option value="500" />
+          <option value="1000" />
+        </datalist>
+      </div>
+      <div class="control">
+        <label>Aperture</label>
+        <input id="aperture-unlocked" type="checkbox" checked />
+        <span id="aperture-display"></span>
+        <input
+          id="aperture-value"
+          list="aperture-list"
+          value="8"
+          min="1.4"
+          max="22"
+          step="any"
+          type="range"
+        />
+        <datalist id="aperture-list">
+          <option value="1.4" />
+          <option value="2" />
+          <option value="2.8" />
+          <option value="4" />
+          <option value="5.6" />
+          <option value="8" />
+          <option value="11" />
+          <option value="16" />
+          <option value="22" />
+        </datalist>
+      </div>
     </div>
     <script type="module" src="main.js"></script>
   </body>

@@ -31,8 +31,7 @@ export class LuminanceWatcher {
 
   async getCameraStream() {
     return await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment' },
-      audio: false,
+      video: true,
     });
   }
 
@@ -72,7 +71,7 @@ export class LuminanceWatcher {
   getAverageLuminance() {
     this.drawVideoToCanvas();
     const rgb = this.getAverageRGB();
-    if (!rgb) return;
+    if (!rgb) return 0;
 
     const { r, g, b } = rgb;
 

@@ -1,5 +1,5 @@
 export class LuminanceWatcher {
-  $video = document.createElement('video');
+  $video = document.getElementById('video');
   $canvas = document.createElement('canvas');
 
   width = 320;

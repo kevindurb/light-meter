@@ -31,7 +31,7 @@ export class LuminanceWatcher {
 
   async getCameraStream() {
     return await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: { facingMode: 'environment', aspectRatio: 1 },
     });
   }
 

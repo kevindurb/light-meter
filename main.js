@@ -12,7 +12,6 @@ import { LuminanceWatcher } from './LuminanceWatcher.js';
 const controlsView = new ControlsView();
 const luminanceWatcher = new LuminanceWatcher();
 const calibrationConstant = 12.5;
-const $startButton = document.getElementById('start-button');
 
 async function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -61,4 +60,4 @@ function start() {
   loop();
 }
 
-$startButton.addEventListener('click', start);
+start();

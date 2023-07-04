@@ -2,10 +2,12 @@ export class LuminanceWatcher {
   $video = document.getElementById('video');
   $canvas = document.createElement('canvas');
 
-  width = 320;
+  width = 0;
   height = 0;
 
   constructor() {
+    this.width = this.$video.clientWidth;
+
     this.$video.addEventListener(
       'canplay',
       () => {
@@ -31,7 +33,7 @@ export class LuminanceWatcher {
 
   async getCameraStream() {
     return await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'environment', aspectRatio: 1 },
+      video: { facingMode: 'environment', aspectRatio: 4 / 3 },
     });
   }
 

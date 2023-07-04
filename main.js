@@ -9,7 +9,10 @@
 import { ControlsView } from './ControlsView.js';
 import { LuminanceWatcher } from './LuminanceWatcher.js';
 
+const controlsView = new ControlsView();
+const luminanceWatcher = new LuminanceWatcher();
 const calibrationConstant = 12.5;
+const $startButton = document.getElementById('start-button');
 
 async function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -27,35 +30,35 @@ function getISO(luminance, aperture, speed) {
   return ((Math.pow(aperture, 2) / speed) * calibrationConstant) / luminance;
 }
 
-async function init() {
-  const controlsView = new ControlsView();
-  const luminanceWatcher = new LuminanceWatcher();
+function render() {
+  const luminance = luminanceWatcher.getAverageLuminance();
+  controlsView.setLuminanceValue(luminance);
 
-  luminanceWatcher.start();
+  const iso = parseFloat(controlsView.getISOValue());
+  const speed = 1 / parseFloat(controlsView.getSpeedValue());
+  const aperture = parseFloat(controlsView.getApertureValue());
 
-  while (true) {
-    await delay(100);
-    const luminance = luminanceWatcher.getAverageLuminance();
-    controlsView.setLuminanceValue(luminance);
+  if (!controlsView.getISOIsUnlocked()) {
+    controlsView.setISOValue(getISO(luminance, aperture, speed));
+  }
 
-    const iso = parseFloat(controlsView.getISOValue());
-    const speed = 1 / parseFloat(controlsView.getSpeedValue());
-    const aperture = parseFloat(controlsView.getApertureValue());
+  if (!controlsView.getSpeedIsUnlocked()) {
+    controlsView.setSpeedValue(1.0 / getShutterSpeed(luminance, iso, aperture));
+  }
 
-    if (!controlsView.getISOIsUnlocked()) {
-      controlsView.setISOValue(getISO(luminance, aperture, speed));
-    }
-
-    if (!controlsView.getSpeedIsUnlocked()) {
-      controlsView.setSpeedValue(
-        1.0 / getShutterSpeed(luminance, iso, aperture),
-      );
-    }
-
-    if (!controlsView.getApertureIsUnlocked()) {
-      controlsView.setApertureValue(getAperture(luminance, iso, speed));
-    }
+  if (!controlsView.getApertureIsUnlocked()) {
+    controlsView.setApertureValue(getAperture(luminance, iso, speed));
   }
 }
 
-init();
+function loop() {
+  render();
+  window.requestAnimationFrame(() => loop());
+}
+
+function start() {
+  luminanceWatcher.start();
+  loop();
+}
+
+$startButton.addEventListener('click', start);
